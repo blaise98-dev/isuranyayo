@@ -1,0 +1,99 @@
+
+                                    <li><a href="#">Language</a>
+                                        <ul class="sub-menu" aria-labelledby="dropdownMenu1">
+                                            <li><a href="#" data-value="separated link" class="lang-select"
+                                                    data-lang="en"><span
+                                                        class="ml-1 flag-icon flag-icon-us"></span><span>
+                                                        English</span></a></li>
+                                            <li><a href="#" data-value="another action" class="lang-select"
+                                                    data-lang="fr"><span
+                                                        class="ml-1 flag-icon flag-icon-fr"></span>
+                                                    <span>France</span></a></li>
+                                            <li><a href="#" data-value="another action" class="lang-select"
+                                                    data-lang="sw"><span
+                                                        class="ml-1 flag-icon flag-icon-tz"></span>
+                                                    <span>Swahili</span></a></li>
+                                        </ul>
+                                        <div class="pull-right" id="google_translate_element"></div>
+                                    </li>
+
+<style>
+    .goog-te-banner-frame.skiptranslate {
+        display: none !important;
+    }
+    .goog-tooltip {
+    display: none !important;
+    }
+    .goog-tooltip:hover {
+        display: none !important;
+    }
+    .goog-text-highlight {
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    body {
+        top: 0px !important;
+    }
+
+    .mainmenu ul#nav>li {
+        margin-right: 18px;
+    }
+
+    .mainmenu ul.sub-menu,
+    .mainmenu ul.sub-menu ul.inside-menu {
+        top: 60%;
+    }
+
+    #google_translate_element {
+        display: none;
+    }
+    #dropdown-menu li {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .dropdown-menu span:nth-child(2) font font {
+        font-size: 14px;
+    }
+</style>
+
+<script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+            }
+        
+        	var flags = document.getElementsByClassName('lang-select'); 
+	
+            Array.prototype.forEach.call(flags, function(e){
+              e.addEventListener('click', function(){
+                var lang = e.getAttribute('data-lang'); 
+                var languageSelect = document.querySelector("select.goog-te-combo");
+                languageSelect.value = lang; 
+                languageSelect.dispatchEvent(new Event("change"));
+              }); 
+            });
+        </script>
+        
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+<script>
+            jQuery(window).load(function () {
+                var cookie = document.cookie;
+                var position = cookie.indexOf("googtrans");
+                var language = cookie.substring(position+10, position + 16);
+                var act_lang = language.split('/');
+                var flag = act_lang[act_lang.length - 1].length != 2 ? 'us' :  act_lang[act_lang.length - 1] == 'en' ? 'us' : act_lang[act_lang.length - 1] == 'sw' ? 'tz' : act_lang[act_lang.length - 1];
+                $("#dropdownMenu1 span").replaceWith("<span class='flag-icon flag-icon-"+flag+"'></span>");
+                $(this).prepend($("#dropdownMenu1").html());
+            });
+            
+		    $(".dropdown-menu li a").click(function(){
+		        $('#loader-cont').show();
+		        $("#dropdownMenu1 span").replaceWith($(this).find('.flag-icon'));
+		        $(this).prepend($("#dropdownMenu1").html());
+		        $('#loader-cont').hide();
+            });
+            
+		</script>
